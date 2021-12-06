@@ -15,7 +15,6 @@ export class VendaCadastroComponent implements OnInit {
   clientes: Array<any> =[]
   produtos: Array<any> = []
 
-
   constructor(private vendaService: VendasService) { }
 
   ngOnInit(): void {

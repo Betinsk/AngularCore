@@ -19,13 +19,16 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { VendasListagemComponent } from './vendas-listagem/vendas-listagem.component';
 import { VendaCadastroComponent } from './venda-cadastro/venda-cadastro.component';
+import { LOCALE_ID } from '@angular/core';
+import { produtosListagemComponent } from './produtos-listagem/produtos-listagem.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     VendasListagemComponent,
-    VendaCadastroComponent
+    VendaCadastroComponent,
+    produtosListagemComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,9 @@ import { VendaCadastroComponent } from './venda-cadastro/venda-cadastro.componen
     
     
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt' },
+  ],
   bootstrap: [AppComponent],
 
 })
