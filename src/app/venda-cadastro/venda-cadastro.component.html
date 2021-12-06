@@ -1,0 +1,22 @@
+<div class="ui-g">
+    <div class="ui-g 12">
+        <h1>Cadastro vendas</h1>
+    </div>
+</div>
+
+<form>
+    <div class="ui-g">
+        <div class="ui-g-8 ui-fluid">
+            <label>Clientes </label>
+            <p-dropdown id="id " name="nome"
+            placeholder="Selection..."
+            [options]="clientes" optionlabel="nome"></p-dropdown>
+        </div>
+
+            <div class="ui-g-4 ui-fluid">
+                <label>Frete </label>
+                <input pInputText id = "frete" name= "frete"
+                currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"/>
+            </div>
+    </div>
+</form>
