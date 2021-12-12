@@ -1,27 +1,34 @@
 <div class="ui-g">
     <div class="ui-g-12">
-      <p-table [value]="clientes">
+      <p-table [value]="vendas">
         <ng-template pTemplate="caption">
-           <h2> Listagem de clientes </h2>
+           <h2> Listagem de vendas </h2>
         </ng-template>
 
         <ng-template pTemplate="header">
             <tr>
               <th class="col-header-id">Código</th>
-              <th>Cliente</th>
+              <th>frete</th>
+              <th>total</th>
+              <th>id cliente</th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-clientes>
+          <ng-template pTemplate="body" let-vendas>
             <tr>
               <td>
-                {{ clientes.id_cliente }}
+                {{ vendas.id_venda }}
               </td>
               <td>
-                {{ clientes.nome }}
+                {{ vendas.frete }}
+              </td>
+              <td>
+                {{ vendas.total }}
+              </td>
+              <td>
+                {{ vendas.id_cliente }}
               </td>
             </tr>
           </ng-template>
         </p-table>
-
       </div>
     </div>

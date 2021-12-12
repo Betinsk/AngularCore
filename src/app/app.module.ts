@@ -1,43 +1,55 @@
-import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-
+import { MessageService } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { PanelModule } from 'primeng/panel';
-import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
 
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LOCALE_ID } from '@angular/core';
+
+import { VendaCadastroComponent } from './venda-cadastro/venda-cadastro.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import { VendaComponent } from './venda/venda.component';
+import { ProdutoComponent } from './produto/produto.component';
+
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClienteComponent
+    
+    VendaCadastroComponent,
+    ClienteComponent,
+    VendaComponent,
+    ProdutoComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    TableModule,
     HttpClientModule,
+    FormsModule,
+
+    
+    TableModule,
     DropdownModule,
     InputTextModule,
     PanelModule,
-    FormsModule
-    
+    ButtonModule,
     
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
+    MessageService
   ],
-  bootstrap: [AppComponent],
-
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { VendasService } from '../vendas/vendas.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { VendasService } from '../vendas/vendas.service';
 })
 export class ClienteComponent implements OnInit {
 
- 
+  cliente: any
   clientes: Array<any> = [];
 
   constructor(private vendaService: VendasService) { }
@@ -23,4 +24,14 @@ export class ClienteComponent implements OnInit {
       .subscribe(response => this.clientes = response);
   }
 
+
+
+  adicionar(frm: FormGroup) {
+    this.vendaService.adicionar(this.cliente).subscribe(response => {
+
+      this.vendaService.adicionar(response);
+
+    });
+
+}
 }
