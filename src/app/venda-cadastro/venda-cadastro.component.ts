@@ -1,8 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { MessageService } from 'primeng/api';
-import { TableModule } from 'primeng/table';
-
 
 import { VendasService } from '../vendas/vendas.service';
 
@@ -19,8 +15,7 @@ export class VendaCadastroComponent implements OnInit {
   produtos: Array<any> = [];
   @Output() vendaSalva = new EventEmitter();
 
-  constructor(private vendaService: VendasService,
-    private messageService: MessageService) { }
+  constructor(private vendaService: VendasService) { }
 
   ngOnInit() {
     this.vendaService.listarClientes()
@@ -38,7 +33,7 @@ export class VendaCadastroComponent implements OnInit {
   }
 
   incluirItem() {
-    this.item.total = (this.item.produto.valor * this.item.quantidade);
+    this.item.total = (this.item.valor * this.item.quantidade);
 
     this.venda.itens.push(this.item);
 
@@ -48,22 +43,40 @@ export class VendaCadastroComponent implements OnInit {
   }
 
   calcularTotal() {
+    console.log(this.venda)
     const totalItens = this.venda.itens
-      .map((i: { produto: { valor: number; }; quantidade: number; }) => (i.produto.valor * i.quantidade))
-      .reduce((total: any, v: any) => total + v, 0);
-
+      .map((i: any) => (i.valor * i.quantidade))
+      .reduce((total:any, v:any) => total + v, 0);
     this.venda.total = totalItens + this.venda.frete;
   }
 
-  adicionar(frm: FormGroup) {
-    this.vendaService.adicionar(this.venda).subscribe(response => {
-      frm.reset();
+  adicionar(frm: any ) {
+    console.log(frm)
+    console.log(this.venda)
+    let itens = <any>[]
+    this.venda.itens.forEach((e:any) => {
+      let item = {
+        valor: e.valor,
+        id_produto: e.id_produto,
+        quantidade: Number(e.quantidade)
+      }
 
+      itens.push(item)
+      
+    });
+    let venda = {
+        id_cliente: this.venda.cliente.id_cliente,
+        frete: this.venda.frete,
+        total: this.venda.total,
+        itens: itens
+    }
+    
+     this.vendaService.adicionar(venda).subscribe(response => {
+       frm.reset();
+       response.itens = this.venda.itens
       this.novaVenda();
 
-      this.messageService.add({ severity: 'success', detail: 'Venda adicionada com sucesso!' });
-
-      this.vendaSalva.emit(response);
+    this.vendaSalva.emit(response);
     });
   }
 

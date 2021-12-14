@@ -1,103 +1,103 @@
-<div class="ui-g">
-  <div class="ui-g-12">
-    <h1>Cadastro venda</h1>
+<div class="container-fluid">
+<nav class="navbar navbar-light bg-light navbar">
+  <div class="container-fluid">
+    <h1 class="navbar-brand  mx-auto font-weight-bold" >Cadastro venda</h1>
   </div>
-</div>
+</nav>
 
-<form #frm="ngForm" (ngSubmit)="adicionar(frm)">
-  <div class="ui-g">
-    <div class="ui-g-8 ui-sm-12 ui-fluid">
-      <label>Cliente</label>
-      <p-dropdown id="cliente" name="cliente"
-      placeholder="Selecione..."
-        [options]="clientes" optionLabel="nome"
-        [(ngModel)]="venda.cliente" ></p-dropdown>
+
+
+
+
+  <form autocomplete="off" #frm="ngForm" (ngSubmit)="adicionar(frm)">
+    <div class="row">
+      <div class="col-12 col-md-8">
+
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Cliente</label>
+          <select class="form-control" [(ngModel)]="venda.cliente" name="nome"  id="nome" required>
+            <option [ngValue]="cliente" *ngFor="let cliente of clientes">{{cliente.nome}}</option>
+
+          </select>
+        </div>
+
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Frete</label>
+          <input [(ngModel)]="venda.frete" name="frete"  id="frete" type="number" class="form-control" placeholder="0.00" required>
+        </div>
+      </div>
     </div>
 
-    <div class="ui-g-4 ui-sm-12 ui-fluid">
-      <label>Frete</label>
-      <input pInputText id="frete" name="frete"
-        [(ngModel)]="venda.frete" required
-        (ngModelChange)="calcularTotal()"/>
-    </div>
-
-    <div class="ui-g-12">
-      <p-panel header="Itens">
-        <div class="ui-g">
-          <div class="ui-g-8 ui-sm-12 ui-fluid">
-            <label>Produto</label>
-            <p-dropdown id="produto" name="produto"
-             placeholder="Selecione..."
-              [options]="produtos" optionLabel="nome"
-              [(ngModel)]="item.produto"
-              #produto></p-dropdown>
-          </div>
-
-          <div class="ui-g-3 ui-sm-12 ui-fluid">
-            <label>Quantidade</label>
-            <input pInputText type="number" id="quantidade" name="quantidade"
-              [(ngModel)]="item.quantidade"
-              #quantidade/>
-          </div>
-
-          <div class="ui-g-1 ui-sm-4 ui-fluid">
-            <br />
-            <button pButton type="button" icon="pi pi-plus" 
-              (click)="incluirItem()"
-              [disabled]="!produto.value || !quantidade.value"></button>
-          </div>
-
-          <div class="ui-g-12">
-            <p-table [value]="venda.itens">
-              <ng-template pTemplate="header">
-                <tr>
-                  <th>Produto</th>
-                  <th>Valor unitário</th>
-                  <th>Quantidade</th>
-                  <th>Total</th>
-                </tr>
-              </ng-template>
-
-              <ng-template pTemplate="body" let-item>
-                <tr>
-                  <td>
-                    <span class="ui-column-title">Produto</span>
-                    {{ item.produto.nome }}
-                  </td>
-                  <td>
-                    <span class="ui-column-title">Valor unitário</span>
-                    {{ item.produto.valor}}
-                  </td>
-                  <td>
-                    <span class="ui-column-title">Quantidade</span>
-                    {{ item.quantidade }}
-                  </td>
-                  <td>
-                    <span class="ui-column-title">Total</span>
-                    {{ item.total }}
-                  </td>
-                </tr>
-              </ng-template>
-
-              <ng-template pTemplate="emptymessage">
-                <tr>
-                  <td colspan="4">Nenhum item adicionado na venda.</td>
-                </tr>
-              </ng-template>
-            </p-table>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Itens</h5>
+            <div class="row">
+              <div class="col-12 col-md-8">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Produtos</label>
+                  <select  class="form-control" [(ngModel)]="item" name="produto"  id="exampleFormControlSelect1">
+                    <option *ngFor="let produto of produtos" [ngValue]="produto" >{{produto.nome}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 ">
+                <div class="row">
+                  <div class="col-12 col-md-8 ">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Quantidade</label>
+                      <input [(ngModel)]="item.quantidade" name="quantidade" type="text" class="form-control" placeholder="0">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4 pt-button"> 
+                   <button type="button" [disabled]="!item || !item.quantidade" (click)="incluirItem()" class="btn btn-dark">+</button></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Produto</th>
+                      <th scope="col">Valor unitário</th>
+                      <th scope="col">Quantidade</th>
+                      <th scope="col">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of venda.itens">
+                      <td>{{item.nome}}</td>
+                      <td>{{item.valor | currency:'BRL'}}</td>
+                      <td>{{item.quantidade}}</td>
+                      <td>{{item.total | currency:'BRL'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
-      </p-panel>
+      </div>
+    
+    
     </div>
 
-    <div class="ui-g-4 ui-g-offset-8 ui-sm-12 ui-sm-offset-0 ui-fluid">
-      <label>Total</label>
-      <input pInputText readonly [value]="venda.total" />
+    <div class="row justify-content-end mt-4 "  >
+      <div class="col-3">
+        <h4>Total</h4>
+        <span>{{venda.total | currency:'BRL'}}</span>
+      </div>
     </div>
 
-    <div class="ui-g-4">
-      <button pButton icon="pi pi-check" label="Salvar"
-        [disabled]="frm.invalid || venda.itens.length === 0"></button>
+    <div class="row">
+      <div class="col">
+        <button type="submit" [disabled]="frm.invalid || venda.itens.length === 0"  class="btn btn-dark">Salvar</button>
+      </div>
     </div>
-  </div>
-</form>
+
+  </form>
+</div>
