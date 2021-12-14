@@ -49,7 +49,7 @@ export class VendaCadastroComponent implements OnInit {
       .reduce((total:any, v:any) => total + v, 0);
     this.venda.total = totalItens + this.venda.frete;
   }
-
+  
   adicionar(frm: any ) {
     console.log(frm)
     console.log(this.venda)

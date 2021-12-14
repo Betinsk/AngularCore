@@ -17,7 +17,6 @@
           <label for="exampleFormControlSelect1">Cliente</label>
           <select class="form-control" [(ngModel)]="venda.cliente" name="nome"  id="nome" required>
             <option [ngValue]="cliente" *ngFor="let cliente of clientes">{{cliente.nome}}</option>
-
           </select>
         </div>
 
@@ -99,5 +98,6 @@
       </div>
     </div>
 
+   
   </form>
 </div>

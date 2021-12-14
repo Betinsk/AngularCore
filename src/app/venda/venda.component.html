@@ -1,34 +1,19 @@
-<div class="ui-g">
-    <div class="ui-g-12">
-      <p-table [value]="vendas">
-        <ng-template pTemplate="caption">
-           <h2> Listagem de vendas </h2>
-        </ng-template>
 
-        <ng-template pTemplate="header">
-            <tr>
-              <th class="col-header-id">Código</th>
-              <th>frete</th>
-              <th>total</th>
-              <th>id cliente</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-vendas>
-            <tr>
-              <td>
-                {{ vendas.id_venda }}
-              </td>
-              <td>
-                {{ vendas.frete }}
-              </td>
-              <td>
-                {{ vendas.total }}
-              </td>
-              <td>
-                {{ vendas.id_cliente }}
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </div>
-    </div>
+ <table class="table"  >
+    <thead class="thead-light ">
+      <tr>
+        <th scope="col">Código</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">DataCadastro</th>
+        <th scope="col">Total</th>
+      </tr>
+    </thead>
+    <tbody  >
+      <tr *ngFor="let item of vendas">
+        <th scope="row">{{item.id_venda}}</th>
+        <td >{{item.id_cliente}}</td>
+        <td>{{item.frete  | currency:'BRL'}}</td>
+        <td>{{item.total | currency:'BRL'}}</td>
+      </tr>
+    </tbody>
+  </table>

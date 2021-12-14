@@ -19,7 +19,6 @@ import { VendaCadastroComponent } from './venda-cadastro/venda-cadastro.componen
 import { ClienteComponent } from './cliente/cliente.component';
 import { VendaComponent } from './venda/venda.component';
 import { ProdutoComponent } from './produto/produto.component';
-import { VendaSimplesComponent } from './venda-simples/venda-simples.component';
 
 
 registerLocaleData(localePt);
@@ -32,7 +31,7 @@ registerLocaleData(localePt);
     ClienteComponent,
     VendaComponent,
     ProdutoComponent,
-    VendaSimplesComponent
+    
   ],
   imports: [
     BrowserModule,
