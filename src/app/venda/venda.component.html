@@ -1,4 +1,13 @@
 
+<div class="col-sm-12">
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand">Listagem de vendas</a>
+  </div>
+</nav>
+</div>
+
+<div class="col-sm-12">
  <table class="table"  >
     <thead class="thead-light ">
       <tr>
@@ -11,9 +20,10 @@
     <tbody  >
       <tr *ngFor="let item of vendas">
         <th scope="row">{{item.id_venda}}</th>
-        <td >{{item.id_cliente}}</td>
-        <td>{{item.frete  | currency:'BRL'}}</td>
+        <td >{{item?.cliente?.nome}}</td>
+        <td>{{item.dataCadastro | date: 'dd/MM/yyyy'}}</td>
         <td>{{item.total | currency:'BRL'}}</td>
       </tr>
     </tbody>
   </table>
+</div>
